@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstring>
+#include <stack>
+
+std::stack <char> left, right;
+
+int main() {
+	char first[100010]; // original string
+	scanf("%s", first);
+	int n = strlen(first);
+
+	for (int i = 0; i < n; ++i) {
+		left.push(first[i]);
+	}
+
+	int second; // The number of commands
+	scanf("%d", &second);
+	while (second--) {
+		char command = ' ';
+		scanf(" %c", &command);
+
+		if (command == 'L') {
+			if (!left.empty()) {
+				right.push(left.top());
+				left.pop();
+			}
+		}
+		else if (command == 'D') {
+			if (!right.empty()) {
+				left.push(right.top());
+				right.pop();
+			}
+		}
+		else if (command == 'B') {
+			if (!left.empty()) {
+				left.pop();
+			}
+		}
+		else if (command == 'P') {
+			char c;
+			scanf(" %c", &c);
+			left.push(c);
+		}
+	}
+	
+	while (!left.empty()) {
+		right.push(left.top());
+		left.pop();
+	}
+
+	while (!right.empty()) {
+		printf("%c", right.top());
+		right.pop();
+	}
+	return 0;
+}
