@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+
+struct Stack {
+	int dat[100100] = { 0, };
+	int x = 0;
+	void push(int n) {
+		dat[x] = n;
+		x += 1;
+	}
+	void pop() {
+		x -= 1;
+		dat[x] = 0;
+	}
+	int top() {
+		if (x == 0) return 0;
+		else return dat[x-1];
+	}
+};
+
+struct Queue {
+	char dat[200200];
+	int f = 0; int r = 0; int size = 0;
+	void push(char c) {
+		dat[r] = c;
+		r += 1;
+		size++;
+	}
+	void pop() {
+		printf("%c\n", dat[f]);
+		f += 1;
+		size--;
+	}
+	bool empty() {
+		return (size == 0 ? true : false);
+	}
+};
+
+int input[100100];
+int pp = 1;
+
+int main() {
+	Stack s;
+	Queue answer;
+	int size;
+	scanf("%d", &size);
+	for (int i = 0; i < size; ++i) 
+		scanf("%d", &input[i]);
+
+	for (int i = 0; i < size; ++i) {
+		bool flag = false;
+		while (!flag) {
+			if (s.top() > input[i]) {
+				printf("NO\n");
+				return 0;
+			}
+			else if (s.top() < input[i]) {
+				s.push(pp++);
+				answer.push('+');
+			}
+			else {
+				s.pop();
+				answer.push('-');
+				flag = true;
+			}
+		}
+	}
+
+	while (!answer.empty()) 
+		answer.pop();
+
+	return 0;
+}
