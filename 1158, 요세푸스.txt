@@ -1,0 +1,31 @@
+#include <iostream>
+#include <queue>
+
+std::queue <int> q;
+
+int n;
+int turn;
+
+int main() {
+	scanf("%d %d", &n, &turn);
+	for (int i = 1; i <= n; ++i) 
+		q.push(i);
+
+	printf("<");
+	while (!q.empty()) {
+		for (int i = 1; i < turn; ++i) {
+			int temp = 0;
+			temp = q.front();
+			q.push(temp);
+			q.pop();
+		}
+		printf("%d", q.front());
+		q.pop();
+		if (!q.empty()) 
+			printf(", ");
+	}
+	printf(">");
+
+
+	return 0;
+}
