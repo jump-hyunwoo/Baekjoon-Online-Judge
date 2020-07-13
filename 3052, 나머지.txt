@@ -1,0 +1,19 @@
+#include <iostream>
+
+bool result[42];
+
+int t = 10;
+int answer = 0;
+
+int main() {
+    while (t--) {
+        int input;
+        scanf("%d", &input);
+        if(!result[input%42]) {
+            result[input%42] = true;
+            answer += 1;
+        }
+    }
+    printf("%d\n", answer);
+    return 0;
+}
