@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstring>
+
+struct Queue {
+	int data[100100];
+	int f, r, cnt;
+	
+	void create() {
+		f = r = cnt = 0;
+	}
+
+	void push(int n) {
+		data[r] = n;
+		r += 1;
+		cnt += 1;
+	}
+	void pop() {
+		if (cnt == 0) printf("-1\n");
+		else {
+			printf("%d\n", data[f]);
+			data[f] = 0;
+			f += 1;
+			cnt -= 1;
+		}
+	}
+	void size() {
+		printf("%d\n", cnt);
+	}
+	void empty() {
+		if (cnt == 0) printf("1\n");
+		else printf("0\n");
+	}
+	void front() {
+		if (cnt == 0) printf("-1\n");
+		else printf("%d\n", data[f]);
+	}
+	void back() {
+		if (cnt == 0) printf("-1\n");
+		else printf("%d\n", data[r - 1]);
+	}
+};
+
+int main() {
+	Queue q;
+	q.create();
+
+	int t;
+	scanf("%d", &t);
+	while (t--) {
+		char command[10];
+		scanf("%s", command);
+
+		if (strcmp(command, "push") == 0) {
+			int add;
+			scanf("%d", &add);
+			q.push(add);
+		}
+		else if (strcmp(command, "pop") == 0) {
+			q.pop();
+		}
+		else if (strcmp(command, "size") == 0) {
+			q.size();
+		}
+		else if (strcmp(command, "empty") == 0) {
+			q.empty();
+		}
+		else if (strcmp(command, "front") == 0) {
+			q.front();
+		}
+		else if (strcmp(command, "back") == 0) {
+			q.back();
+		}
+	}
+	return 0;
+}
