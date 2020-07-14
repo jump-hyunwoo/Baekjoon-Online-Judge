@@ -1,0 +1,47 @@
+#include <iostream>
+#include <stack>
+#include <queue>
+
+const int MAX = 100'100;
+
+std::stack <char> s;
+std::queue <char> q;
+
+char string[MAX];
+
+bool flag = false;
+
+int main() {
+	fgets(string, MAX, stdin);
+	for (char c : string) {
+		if (c == '<') {
+			while (!s.empty()) {
+				printf("%c", s.top());
+				s.pop();
+			}
+			flag = true;
+		}
+		else if (c == '>') {
+			flag = false;
+			printf("<");
+			while (!q.empty()) {
+				printf("%c", q.front());
+				q.pop();
+			}
+			printf(">");
+		}
+		else if ((c == '\n' || c == ' ') && !flag) {
+			while (!s.empty()) {
+				printf("%c", s.top());
+				s.pop();
+			}
+			if (c == ' ') printf(" ");
+		}
+		else if (c == '\0') break;
+		else {
+			if (flag) q.push(c);
+			if (!flag) s.push(c);
+		}
+	}
+	return 0;
+}
