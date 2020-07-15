@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stack>
+
+const int MAX = 1000001;
+
+std::stack <int> s;
+
+int arr[MAX];
+int arr_f[MAX];
+int result[MAX];
+
+int n;
+
+int main() {
+	scanf("%d", &n);
+	for (int i = 1; i <= n; ++i) {
+		scanf("%d", &arr[i]);
+		arr_f[arr[i]] += 1;
+	}
+
+	for (int i = 1; i <= n; ++i) {
+		if (s.empty()) s.push(i);
+		else {
+			while (!s.empty() && arr_f[arr[i]] > arr_f[arr[s.top()]]) {
+				result[s.top()] = arr[i];
+				s.pop();
+			}
+			s.push(i);
+		}
+	}
+
+	while (!s.empty()) {
+		result[s.top()] = -1;
+		s.pop();
+	}
+
+	for (int i = 1; i <= n; ++i) printf("%d ", result[i]);
+	return 0;
+}
