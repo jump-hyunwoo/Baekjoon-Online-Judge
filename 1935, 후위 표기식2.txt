@@ -1,0 +1,55 @@
+#include <iostream>
+#include <stack>
+
+std::stack <double> s;
+
+int arr[30];
+
+int n;
+
+int main() {
+	scanf("%d", &n);
+	getchar();
+	
+	char string[110];
+	fgets(string, 110, stdin);
+
+	for (int i = 0; i < n; ++i)
+		scanf("%d", &arr[i]);
+
+	for (char c : string) {
+		if (c == '*') {
+			double a = s.top(); s.pop();
+			double b = s.top(); s.pop();
+			b *= a;
+			s.push(b);
+		}
+		else if (c == '/') {
+			double a = s.top(); s.pop();
+			double b = s.top(); s.pop();
+			b /= a;
+			s.push(b);
+		}
+		else if (c == '+') {
+			double a = s.top(); s.pop();
+			double b = s.top(); s.pop();
+			b += a;
+			s.push(b);
+		}
+		else if (c == '-') {
+			double a = s.top(); s.pop();
+			double b = s.top(); s.pop();
+			b -= a;
+			s.push(b);
+		}
+		else if (c == '\n') break;
+		else {
+			s.push(arr[c - 65]);
+		}
+	}
+
+	
+	printf("%.2f\n", s.top());
+
+	return 0;
+}
