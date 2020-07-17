@@ -1,0 +1,9 @@
+#include <iostream>
+#include <cstring>
+
+int main() {
+	char input[100000];
+	scanf("%s", input);
+	printf("%d", strlen(input));
+	return 0;
+}
