@@ -1,0 +1,21 @@
+#include <iostream>
+
+int main() {
+	char password[110];
+
+	fgets(password, 110, stdin);
+	int idx = 0;
+
+	for (char c : password) {
+		if (c == '\n') break;
+		else if ('a' <= c && c <= 'm') password[idx++] = c + 13;
+		else if ('n' <= c && c <= 'z') password[idx++] = c - 13;
+		else if ('A' <= c && c <= 'M') password[idx++] = c + 13;
+		else if ('N' <= c && c <= 'Z') password[idx++] = c - 13;
+		else if ('0' <= c && c <= '9') password[idx++] = c;
+		else if (c == ' ') password[idx++] = ' ';
+	}
+
+	printf("%s", password);
+	return 0;
+}
