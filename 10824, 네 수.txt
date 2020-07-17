@@ -1,0 +1,13 @@
+#include <iostream>
+#include <string>
+
+int main() {
+	int a, b, c, d;
+	scanf("%d %d %d %d", &a, &b, &c, &d);
+	std::string st1 = std::to_string(a) + std::to_string(b);
+	std::string st2 = std::to_string(c) + std::to_string(d);
+	long long result = stoll(st1) + stoll(st2);
+
+	printf("%lld", result);
+	return 0;
+}
