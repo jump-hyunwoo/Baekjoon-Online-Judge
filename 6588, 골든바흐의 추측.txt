@@ -1,0 +1,35 @@
+#include <iostream>
+
+const int MAX = 1000010;
+int prime[MAX];
+bool check[MAX];
+
+int pn;
+int input;
+
+int main() {
+	for (int i = 2; i <= MAX; ++i) {
+		if (!check[i]) {
+			prime[++pn] = i;
+			for (int j = i * 2; j <= MAX; j += i)
+				check[j] = true;
+		}
+	}
+
+	while (1) {
+		scanf("%d", &input);
+		if (input == 0) break;
+		else {
+			bool flag = false;
+			for (int i = 1; i <= pn; ++i) {
+				if (!check[input - prime[i]]) {
+					flag = true;
+					printf("%d = %d + %d\n", input, prime[i], input - prime[i]);
+					break;
+				}
+			}
+			if (!flag) printf("Goldbach's conjecture is wrong.\n");
+		}
+	}
+	return 0;
+}
