@@ -1,0 +1,23 @@
+#include <iostream>
+
+int arr[101];
+
+int n;
+int result;
+
+int main() {
+	scanf("%d", &n);
+	for (int i = 0; i < n; ++i)
+		scanf("%d", &arr[i]);
+
+	for (int i = 0; i < n; ++i) {
+		bool flag = false;
+		for (int j = 2; j * j <= arr[i]; ++j) {
+			if (arr[i] % j == 0) flag = true;
+			if (flag) break;
+		}
+		if (!flag && arr[i] > 1) result += 1;
+	}
+	printf("%d\n", result);
+	return 0;
+}
