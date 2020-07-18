@@ -1,0 +1,17 @@
+#include <iostream>
+
+bool check[1000010];
+
+int a, b;
+
+int main() {
+	scanf("%d %d", &a, &b);
+	for (int i = 2; i <= b; ++i) {
+		if (!check[i]) {
+			if(a <= i) printf("%d\n", i);
+			for (int j = i * 2; j <= b; j += i)
+				check[j] = true;
+		}
+	}
+	return 0;
+}
