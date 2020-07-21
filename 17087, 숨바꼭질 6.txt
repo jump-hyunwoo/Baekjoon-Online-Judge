@@ -1,0 +1,28 @@
+#include <iostream>
+
+int an[100'100];
+
+int n, s;
+int result;
+
+int GCD(int a, int b) {
+	if (b == 0) return a;
+	else return GCD(b, a%b);
+}
+
+int main() {
+	scanf("%d %d", &n, &s);
+	for (int i = 0; i < n; ++i) {
+		int temp = 0;
+		scanf("%d", &temp);
+		an[i] = (temp - s > 0 ? temp - s : s - temp);
+	}
+	
+	result = an[0];
+	for(int i = 1; i < n; ++i) {
+        result = GCD(result, an[i]);
+    }
+	
+	printf("%d\n", result);
+	return 0;
+}
