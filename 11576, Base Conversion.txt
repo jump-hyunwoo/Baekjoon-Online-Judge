@@ -1,0 +1,37 @@
+#include <iostream>
+#include <stack>
+
+int al(int a, int b) {
+	int result = 1;
+	while (b--) {
+		result *= a;
+	}
+	return result;
+}
+
+int main() {
+	int a, b;
+	scanf("%d %d", &a, &b);
+
+	int mid = 0;
+	
+	int level;
+	scanf("%d", &level);
+	for (int i = al(a,level-1); level--; i /= a) {
+		int temp;
+		scanf("%d", &temp);
+		mid += temp * i;
+	}
+
+	std::stack <int> s;
+	while (mid > 0) {
+		int r = mid % b;
+		s.push(r);
+		mid /= b;
+	}
+
+	while (!s.empty()) {
+		printf("%d ", s.top());
+		s.pop();
+	}
+}
