@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+	std::string n;
+	int m;
+
+	std::cin >> n >> m;
+
+	std::reverse(n.begin(), n.end());
+
+	int result = 0;
+	int stat = 1;
+
+	for (char c : n) {
+		if('A' <= c && c <= 'Z') result += ((c - 'A') + 10) * stat;
+		else result += (c - '0') * stat;
+		stat *= m;
+	}
+
+	printf("%d\n", result);
+}
