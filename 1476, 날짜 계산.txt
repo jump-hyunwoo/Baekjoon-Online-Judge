@@ -1,0 +1,16 @@
+#include <iostream>
+
+int E, S, M;
+long long answer = 0;
+
+int main() {
+	scanf("%d %d %d", &E, &S, &M);
+	while (1) {
+		if ((answer % 15 + 1 == E) && (answer % 28 + 1 == S) &&
+			(answer % 19 + 1 == M)) break;
+		answer += 1;
+	}
+
+	printf("%lld\n", answer + 1);
+	return 0;
+}
