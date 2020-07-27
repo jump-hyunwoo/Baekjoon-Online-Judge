@@ -1,0 +1,24 @@
+#include <iostream>
+
+int d[12];
+
+int main() {
+	for (int i = 1; i < 12; ++i) {
+		if (i == 1) d[i] = 1;
+		else if (i == 2) d[i] = 2;
+		else if (i == 3) d[i] = 4;
+		else {
+			d[i] = d[i - 1] + d[i - 2] + d[i - 3];
+		}
+	}
+
+	int t;
+	scanf("%d", &t);
+	while (t--) {
+		int n;
+		scanf("%d", &n);
+		printf("%d\n", d[n]);
+	}
+
+	return 0;
+}
