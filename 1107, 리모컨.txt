@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+std::string number;
+bool use[10]; // 0 ~ 9 number
+int minValue;
+int errnum;
+int n, m;
+
+bool flagFor2;
+bool flagFor3;
+
+void getResult(int x) {
+	if (x >= m) {
+		int num = atoi(number.c_str());
+		int result = std::abs(num - n) + m;
+		minValue = (result < minValue ? result : minValue);
+	}
+	else {
+		for (int i = 0; i < 10; ++i) {
+			if (!use[i]) {
+				number += (i + '0');
+				getResult(x + 1);
+				number.pop_back();
+			}
+		}
+	}
+}
+
+void getResult2(int x) {
+	if (flagFor2) return;
+	if (x > m) {
+		int num = atoi(number.c_str());
+		int result = std::abs(num - n) + (m + 1);
+
+		minValue = (result < minValue ? result : minValue);
+		flagFor2 = true;
+	}
+	else {
+		for (int i = 0; i < 10; ++i) {
+			if (x == 0 && i == 0) continue;
+			if (!use[i]) {
+				number += (i + '0');
+				getResult2(x + 1);
+				number.pop_back();
+			}
+		}
+	}
+}
+
+void getResult3(int x) {
+	if (flagFor3 || m == 1) return;
+	if (x == m - 1) {
+		int num = atoi(number.c_str());
+		int result = std::abs(num - n) + (m - 1);
+
+		minValue = (result < minValue ? result : minValue);
+		flagFor3 = true;
+	}
+	else {
+		for (int i = 9; i >= 0; --i) {
+			if (!use[i]) {
+				number += (i + '0');
+				getResult3(x + 1);
+				number.pop_back();
+			}
+		}
+	}
+}
+
+int main() {
+	std::string a;
+	std::cin >> a;
+	n = atoi(a.c_str());
+	m = a.size();
+
+	scanf("%d", &errnum);
+	for (int i = 0; i < errnum; ++i) {
+		int temp = 0;
+		scanf("%d", &temp);
+		use[temp] = true;
+	}
+
+	minValue = std::abs(100 - n);
+
+	getResult(0);
+	getResult2(0);
+	getResult3(0);
+
+	printf("%d\n", minValue);
+	return 0;
+}
