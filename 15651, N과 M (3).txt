@@ -1,0 +1,25 @@
+#include <iostream>
+
+int arr[10];
+
+int n, m;
+
+void getResult(int x) {
+	if (x >= m) {
+		for (int i = 0; i < m; ++i) printf("%d ", arr[i]);
+		printf("\n");
+	}
+	else {
+		for (int i = 1; i <= n; ++i) {
+			arr[x] = i;
+			getResult(x + 1);
+		}
+	}
+}
+
+int main() {
+	scanf("%d %d", &n, &m);
+	
+	getResult(0);
+	return 0;
+}
