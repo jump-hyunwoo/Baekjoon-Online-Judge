@@ -1,0 +1,32 @@
+#include <iostream>
+
+int main() {
+	int t;
+	scanf("%d", &t);
+	while (t--) {
+		int m, n, x, y;
+		scanf("%d %d %d %d", &m, &n, &x, &y);
+		
+		int year = 1;
+
+		while (1) {
+			int a = (year -1) % m + 1;
+			int b = (year - 1) % n + 1;
+
+			if (a == x) {
+				if (b == y) {
+					printf("%d\n", year);
+					break;
+				}
+				else year += m;
+			}
+			else year += 1;
+
+			if (year >= n * m) {
+				printf("-1\n");
+				break;
+			}
+		}
+	}
+	return 0;
+}
