@@ -1,0 +1,49 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+
+bool check[16];
+char take[16];
+char input[16];
+
+int L, C;
+
+void getResult(int x) {
+	if (x >= L) {
+		int con = 0;
+		int vo = 0;
+		for (int i = 0; i < L; ++i) {
+			if (take[i] == 'a' || take[i] == 'e' || take[i] == 'i'
+				|| take[i] == 'o' || take[i] == 'u') vo += 1;
+			else con += 1;
+		}
+		if (vo >= 1 && con >= 2) {
+			for (int i = 0; i < L; ++i) printf("%c", take[i]);
+			printf("\n");
+		}
+		return;
+	}
+	else {
+		for (int i = 0; i < C; ++i) {
+			if (x == 0 || (input[i]-take[x-1] > 0 && !check[i])) {
+				check[i] = true;
+				take[x] = input[i];
+				getResult(x + 1);
+				check[i] = false;
+			}
+		}
+	}
+}
+
+int main() {
+	scanf("%d %d", &L, &C);
+	for (int i = 0; i < C; ++i) 
+		scanf(" %c", &input[i]);
+
+
+	std::sort(input, input + C);
+
+	getResult(0);
+
+	return 0;
+}
