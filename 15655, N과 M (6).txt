@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+
+bool check[10];
+int arr[10];
+int input[10];
+
+int n, m;
+
+void getResult(int x) {
+	if (x >= m) {
+		for (int i = 0; i < m; ++i) printf("%d ", arr[i]);
+		printf("\n");
+	}
+	else {
+		for (int i = 0; i < n; ++i) {
+			if (x == 0 || (arr[x-1] < input[i] && !check[i])) {
+				check[i] = true;
+				arr[x] = input[i];
+				getResult(x + 1);
+				check[i] = false;
+			}
+		}
+	}
+}
+
+int main() {
+	scanf("%d %d", &n, &m);
+	
+	for (int i = 0; i < n; ++i) {
+		scanf("%d", &input[i]);
+	}
+
+	std::sort(input, input + n);
+
+	getResult(0);
+	return 0;
+}
