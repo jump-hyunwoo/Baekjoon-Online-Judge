@@ -1,0 +1,30 @@
+#include <iostream>
+
+bool check[9];
+int arr[9];
+
+int n;
+
+void getResult(int x) {
+	if (x > n) {
+		for (int i = 1; i <= n; ++i) printf("%d ", arr[i]);
+		printf("\n");
+	}
+	else {
+		for (int i = 1; i <= n; ++i) {
+			if (!check[i]) {
+				arr[x] = i;
+				check[i] = true;
+				getResult(x + 1);
+				check[i] = false;
+			}
+		}
+	}
+}
+
+int main() {
+	scanf("%d", &n);
+
+	getResult(1);
+	return 0;
+}
