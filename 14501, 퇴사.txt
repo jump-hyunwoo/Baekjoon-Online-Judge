@@ -1,0 +1,44 @@
+#include <iostream>
+
+int arr[16];
+int period[16];
+int cost[16];
+
+int maxCost;
+int n;
+
+void getResult(int x) {
+	if (x >= n) {
+		int temp = 0;
+
+		for (int i = 0; i < n; ++i) 
+			if (arr[i] == 1)
+				for (int j = 1; j < period[i]; ++j) 
+					if (arr[i + j] == 1 || i+j > n-1) return;
+
+		for (int i = 0; i < n; ++i)
+			if (arr[i] == 1) temp += cost[i];
+
+		maxCost = (maxCost < temp ? temp : maxCost);
+		return;
+	}
+	else {
+		for (int i = 0; i < 2; ++i) {
+			arr[x] = i;
+			getResult(x + 1);
+		}
+	}
+}
+
+int main() {
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; ++i) {
+		scanf("%d %d", &period[i], &cost[i]);
+	}
+
+	getResult(0);
+
+	printf("%d\n", maxCost);
+	return 0;
+}
