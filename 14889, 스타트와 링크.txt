@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+
+std::vector <int> start, link;
+
+int s[21][21];
+
+int minValue;
+int n;
+
+
+void getResult(int x) {
+	if (x >= n) {
+		if (start.size() != n / 2 || link.size() != n / 2) return;
+		int temp1 = 0; int temp2 = 0;
+		for (int i = 0; i < n / 2; ++i) {
+			for (int j = 0; j < n / 2; ++j) {
+				if (i == j) continue;
+				temp1 += s[start[i]][start[j]];
+				temp2 += s[link[i]][link[j]];
+			}
+		}
+		minValue = (minValue > std::abs(temp1 - temp2) ? std::abs(temp1 - temp2) : minValue);
+		return;
+	}
+	else {
+		if (start.size() > n / 2 || link.size() > n / 2) return;
+		if (start.size() < n / 2) {
+			start.push_back(x);
+			getResult(x + 1);
+			start.pop_back();
+		}
+		if (link.size() < n / 2) {
+			link.push_back(x);
+			getResult(x + 1);
+			link.pop_back();
+		}
+	}
+}
+
+int main() {
+	scanf("%d", &n);
+	for (int i = 0; i < n; ++i) {
+		for (int j = 0; j < n; ++j) {
+			scanf("%d", &s[i][j]);
+		}
+	}
+	minValue = 987987987;
+	getResult(0);
+	printf("%d\n", minValue);
+	return 0;
+}
