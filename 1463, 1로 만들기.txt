@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int d[10'000'010] = {0,0};
+int n;
+
+int main() {
+    scanf("%d", &n);
+    for(int i = 2; i <= n; ++i) {
+        int minValue = d[i-1];
+        
+        if(i % 2 == 0)
+            minValue = (minValue > d[i/2] ? d[i/2] : minValue);
+        
+        if(i % 3 == 0)
+            minValue = (minValue > d[i/3] ? d[i/3] : minValue);
+        
+        d[i] = minValue + 1;
+    }
+    printf("%d", d[n]);
+    return 0;
+}
