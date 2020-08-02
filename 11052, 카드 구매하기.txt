@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int good[1010];
+int price[10010];
+int n;
+
+int DP(int n) {
+    if(n == 0) return 0;
+    else {
+        if(good[n]) return good[n];
+        else {
+            for(int i = 1; i <= n; ++i) {
+                if(good[n] < DP(n-i) + price[i])
+                    good[n] = DP(n-i) + price[i];
+            }
+            return good[n];
+        }
+    }
+}
+
+int main() {
+    scanf("%d", &n);
+    
+    for(int i = 1; i <= n; ++i) 
+        scanf("%d", &price[i]);
+    
+    printf("%d", DP(n));
+    
+    return 0;
+}
